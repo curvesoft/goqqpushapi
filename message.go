@@ -29,7 +29,7 @@ func NewMessageAndroid(title, content string) MessageAndroid {
 	msg.BuilderId = 0
 	msg.NId = 0
 	msg.Ring = 0
-	msg.Vibrate = 0
+	msg.Vibrate = 1
 	msg.Clearable = 1
 	msg.Action.ActionType = TYPE_ACTIVITY
 	msg.Action.Brower.ConfirmOnUrl = 1

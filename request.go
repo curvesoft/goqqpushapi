@@ -13,15 +13,16 @@ type Request struct {
 	Environment int
 }
 
-func NewAndroidRequest() Request {
+func NewAndroidRequest(message PushMessage) Request {
 	var req Request
-	req.ExpireTime = 24 * 60 * 60
+	req.ExpireTime = 24*60*60
 	req.SendTime = time.Now()
 	req.TimeStamp = time.Now().Unix()
 	req.ValidTime = 600
 	req.MessageType = 1
 	req.MultiPkg = 1
 	req.Environment = 1
+	req.Message = message
 
 	return req
 }
