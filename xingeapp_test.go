@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	access_id         = 2100029665
-	secret_key        = "717489ce7e2d1b37bc09799f960a6924"
-	test_device_token = "d5a8b9480c89dcbb4c38b7b5c18b9ae1b5b8ee5d"
+	access_id         = 0
+	secret_key        = "ukey"
+	test_device_token = "utoken"
 )
 
 func TestMessageJson(t *testing.T) {
@@ -17,5 +17,13 @@ func TestMessageJson(t *testing.T) {
 	xg := NewXingePushApp(access_id, secret_key)
 	r := xg.PushAllDevice(req)
 	r = xg.PushSingleDevice(test_device_token, req)
+	fmt.Printf("result=%v", r)
+}
+
+func TestMessageJsonIOS(t *testing.T) {
+	msg := NewMessageIOS("titleios")
+	req := NewIOSRequest(msg, 2)
+	xg := NewXingePushApp(0, "ukey")
+	r := xg.PushAllDevice(req)
 	fmt.Printf("result=%v", r)
 }
