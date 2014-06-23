@@ -66,3 +66,50 @@ func (this MessageAndroid) ToJson() string {
 		return ""
 	}
 }
+
+type AlertData struct {
+	Body         string   `json:"body"`
+	ActionLocKey string   `json:"action-loc-key"`
+	LocKey       string   `json:"loc-key"`
+	LocArgs      []string `json:"loc-args"`
+	LaunchImage  string   `json:"launch-image"`
+}
+
+type ApsData struct {
+	Alert            AlertData `json:"alert"`
+	Badge            int       `json:"badge"`
+	Sound            string    `json:"sound"`
+	ContentAvailable int       `json:"content-available"`
+}
+
+type MessageIOS struct {
+	Aps        ApsData        `json:"aps"`
+	AcceptTime []TimeInterval `json:"accept_time"`
+}
+
+func NewMessageIOS(text string) MessageIOS {
+	var msg MessageIOS
+	msg.Aps.Alert.Body = text
+	return msg
+}
+
+func (this MessageIOS) IsValid() bool {
+	if this.Aps.Alert.Body == "" {
+		return false
+	}
+	for _, at := range this.AcceptTime {
+		if !at.IsValid() {
+			return false
+		}
+	}
+	return true
+}
+
+func (this MessageIOS) ToJson() string {
+	json, err := json.Marshal(this)
+	if err == nil {
+		return string(json)
+	} else {
+		return ""
+	}
+}
